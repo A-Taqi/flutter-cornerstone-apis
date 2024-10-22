@@ -60,9 +60,21 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'users_project1' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Project1\User::class,
+        ],
+        'users_project2' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Project2\User::class,
+        ],
+        'users_project3' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Project3\User::class,
+        ],
+        'users_project4' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Project4\User::class,
         ],
 
         // 'users' => [
