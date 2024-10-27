@@ -6,18 +6,18 @@ use Illuminate\Support\Facades\Route;
 
 
 // Project 1
-Route::prefix("project1")->group(function () {
+Route::prefix("burgan-bill")->group(function () {
     Route::get("/", function () {
-        return "Project 1";
+        return "Burgan Bill";
     });
     Route::post("/signup", [App\Http\Controllers\Project1\AuthController::class, "signup"]);
     Route::post("/login", [App\Http\Controllers\Project1\AuthController::class, "login"]);
 });
 
 // Project 2
-Route::prefix("project2")->group(function () {
+Route::prefix("tasky")->group(function () {
     Route::get("/", function () {
-        return "Project 2";
+        return "Tasky";
     });
 
     Route::post("/signup", [App\Http\Controllers\Project2\AuthController::class, "signup"]);
@@ -25,9 +25,9 @@ Route::prefix("project2")->group(function () {
 });
 
 // Project 3
-Route::prefix("project3")->group(function () {
+Route::prefix("burgan-app")->group(function () {
     Route::get("/", function () {
-        return "Project 3";
+        return "Burgan App";
     });
 
     Route::post("/signup", [App\Http\Controllers\Project3\AuthController::class, "signup"]);
@@ -35,9 +35,9 @@ Route::prefix("project3")->group(function () {
 });
 
 // Project 4
-Route::prefix("project4")->group(function () {
+Route::prefix("burgan-assistant")->group(function () {
     Route::get("/", function () {
-        return "Project 4";
+        return "Burgan Assistant";
     });
 
     Route::post("/signup", [App\Http\Controllers\Project4\AuthController::class, "signup"]);
