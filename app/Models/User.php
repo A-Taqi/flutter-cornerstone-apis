@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Project1\Subscription;
 use App\Models\Project2\Employee;
 use App\Models\Project2\LeaveRequest;
 use App\Models\Project2\Notification;
@@ -67,5 +68,10 @@ class User extends Authenticatable
     public function p2_employee(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Employee::class);
+    }
+
+    public function p1_subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
     }
 }

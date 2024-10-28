@@ -12,6 +12,12 @@ Route::prefix("burgan-bill")->group(function () {
     });
     Route::post("/signup", [App\Http\Controllers\Project1\AuthController::class, "signup"]);
     Route::post("/login", [App\Http\Controllers\Project1\AuthController::class, "login"]);
+
+    // Protected Routes
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::get("/subscriptions", [App\Http\Controllers\Project1\SubscriptionsController::class, "index"]);
+        Route::post("/subscriptions", [App\Http\Controllers\Project1\SubscriptionsController::class, "store"]);
+    });
 });
 
 // Project 2
