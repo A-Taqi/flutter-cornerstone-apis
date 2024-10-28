@@ -52,6 +52,14 @@ Route::prefix("burgan-app")->group(function () {
 
     Route::post("/signup", [App\Http\Controllers\Project3\AuthController::class, "signup"]);
     Route::post("/login", [App\Http\Controllers\Project3\AuthController::class, "login"]);
+
+    // Protected Routes
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::get("/accounts", [App\Http\Controllers\Project3\AccountsController::class, "index"]);
+        Route::post("/accounts", [App\Http\Controllers\Project3\AccountsController::class, "store"]);
+        Route::get("/cards", [App\Http\Controllers\Project3\CardsController::class, "index"]);
+        Route::post("/cards", [App\Http\Controllers\Project3\CardsController::class, "store"]);
+    });
 });
 
 // Project 4

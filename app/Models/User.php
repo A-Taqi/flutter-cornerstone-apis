@@ -8,6 +8,8 @@ use App\Models\Project2\Employee;
 use App\Models\Project2\LeaveRequest;
 use App\Models\Project2\Notification;
 use App\Models\Project2\Task;
+use App\Models\Project3\Account;
+use App\Models\Project3\Card;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,5 +75,15 @@ class User extends Authenticatable
     public function p1_subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function p3_accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
+
+    public function p3_cards()
+    {
+        return $this->hasMany(Card::class);
     }
 }
