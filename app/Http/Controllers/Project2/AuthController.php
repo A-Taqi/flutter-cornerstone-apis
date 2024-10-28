@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Project2;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project2\LoginRequest;
 use App\Http\Requests\Project2\SignupRequest;
-use App\Models\Project2\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -15,6 +15,8 @@ class AuthController extends Controller
         $user = new User();
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->role = 'employee';
+        $user->manager_id = User::where('email', 'manager@tasky.com')->first()->id;
         if($user->save()) {
             $token = $user->createToken('auth_token')->plainTextToken;
             if($token) {
@@ -22,7 +24,8 @@ class AuthController extends Controller
                     'message' => 'success',
                     'data' => [
                         'user' => $user->email,
-                        'token' => $token
+                        'token' => $token,
+                        'role'  =>  $user->role,
                     ]
                 ]);
             }
@@ -43,7 +46,8 @@ class AuthController extends Controller
                     'message' => 'success',
                     'data' => [
                         'user' => $user->email,
-                        'token' => $token
+                        'token' => $token,
+                        'role'  =>  $user->role,
                     ]
                 ]);
             }

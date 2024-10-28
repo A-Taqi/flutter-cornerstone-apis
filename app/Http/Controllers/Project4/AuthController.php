@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Project4;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project4\LoginRequest;
 use App\Http\Requests\Project4\SignupRequest;
-use App\Models\Project4\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller

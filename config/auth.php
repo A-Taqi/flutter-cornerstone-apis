@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users_project1' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Project1\User::class,
+            'model' => \App\Models\User::class,
         ],
         'users_project2' => [
             'driver' => 'eloquent',

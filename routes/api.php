@@ -22,6 +22,20 @@ Route::prefix("tasky")->group(function () {
 
     Route::post("/signup", [App\Http\Controllers\Project2\AuthController::class, "signup"]);
     Route::post("/login", [App\Http\Controllers\Project2\AuthController::class, "login"]);
+
+    // Protected Routes
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::get("/profile", [App\Http\Controllers\Project2\ProfileController::class, "index"]);
+        Route::put("/profile", [App\Http\Controllers\Project2\ProfileController::class, "update"]);
+        Route::get("/notifications", [App\Http\Controllers\Project2\NotificationsController::class, "index"]);
+        Route::get("/tasks", [App\Http\Controllers\Project2\TasksController::class, "index"]);
+        Route::post("/tasks", [App\Http\Controllers\Project2\TasksController::class, "store"]);
+        Route::put("/tasks/{task}", [App\Http\Controllers\Project2\TasksController::class, "update"]);
+        Route::get("/leave-requests", [App\Http\Controllers\Project2\LeaveRequestsController::class, "index"]);
+        Route::post("/leave-requests", [App\Http\Controllers\Project2\LeaveRequestsController::class, "store"]);
+        Route::put("/leave-requests/{leaveRequest}", [App\Http\Controllers\Project2\LeaveRequestsController::class, "update"]);
+//        Route::post("/logout", [App\Http\Controllers\Project1\AuthController::class, "logout"]);
+    });
 });
 
 // Project 3

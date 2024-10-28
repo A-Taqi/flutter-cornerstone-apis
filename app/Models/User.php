@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Models\Project1;
+namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Project2\Employee;
+use App\Models\Project2\LeaveRequest;
+use App\Models\Project2\Notification;
+use App\Models\Project2\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +17,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $connection = "mysql-p1";
     /**
      * The attributes that are mass assignable.
      *
@@ -46,5 +49,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function p2_tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function p2_notifications() {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function p2_leave_requests() {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function p2_employee(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Employee::class);
     }
 }
