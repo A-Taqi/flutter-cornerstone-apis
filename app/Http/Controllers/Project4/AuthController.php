@@ -20,7 +20,10 @@ class AuthController extends Controller
             if($token) {
                 return response()->json([
                     'message' => 'success',
-                    'data' => $token
+                    'data' => [
+                        'user' => $user->email,
+                        'token' => $token
+                    ]
                 ]);
             }
         }
@@ -38,7 +41,10 @@ class AuthController extends Controller
             if($token) {
                 return response()->json([
                     'message' => 'success',
-                    'data' => $token
+                    'data' => [
+                        'user' => $user->email,
+                        'token' => $token
+                    ]
                 ]);
             }
         }
