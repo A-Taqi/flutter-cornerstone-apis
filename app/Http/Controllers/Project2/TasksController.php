@@ -12,12 +12,23 @@ class TasksController extends Controller
 {
     public function index(Request $request)
     {
-        return response()->json([
-            'message' => 'success',
-            'data'  =>  [
-                'tasks' => $request->user()->p2_tasks,
-            ]
-        ]);
+        if($request->user()->role === 'manager') {
+            return response()->json([
+                'message' => 'success',
+                'data'  =>  [
+                    'tasks' => $request->user()->p2_employees->load('p2_tasks'),
+                ]
+            ]);
+        }
+        else {
+            return response()->json([
+                'message' => 'success',
+                'data'  =>  [
+                    'tasks' => $request->user()->p2_tasks,
+                ]
+            ]);
+        }
+
     }
 
     public function store(Request $request) {
