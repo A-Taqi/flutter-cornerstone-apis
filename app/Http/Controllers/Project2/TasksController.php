@@ -16,7 +16,8 @@ class TasksController extends Controller
             return response()->json([
                 'message' => 'success',
                 'data'  =>  [
-                    'tasks' => $request->user()->p2_employees->load('p2_tasks'),
+                    // Get all tasks that belong to users who I am the manager of
+                    'tasks' => Task::whereIn('user_id', $request->user()->p2_employees->pluck('id'))->get()->load('user'),
                 ]
             ]);
         }
