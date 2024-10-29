@@ -41,6 +41,7 @@ Route::prefix("tasky")->group(function () {
         Route::get("/leave-requests", [App\Http\Controllers\Project2\LeaveRequestsController::class, "index"]);
         Route::post("/leave-requests", [App\Http\Controllers\Project2\LeaveRequestsController::class, "store"]);
         Route::put("/leave-requests/{leaveRequest}", [App\Http\Controllers\Project2\LeaveRequestsController::class, "update"]);
+        Route::get("employees", [App\Http\Controllers\Project2\EmployeesController::class, "index"]);
 //        Route::post("/logout", [App\Http\Controllers\Project1\AuthController::class, "logout"]);
     });
 });
