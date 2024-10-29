@@ -27,7 +27,7 @@ class AccountsController extends Controller
         $account = new Account();
         $account->full_name = $request->full_name;
         $account->user_id = $request->user()->id;
-        $account->account_number = $this->generateAccountNumber();
+        $account->account_number = AccountsController::generateAccountNumber();
         if($account->save()) {
             return response()->json([
                 'message' => 'success',
@@ -40,7 +40,7 @@ class AccountsController extends Controller
         ], 500);
     }
 
-    private function generateAccountNumber(): string
+    public static function generateAccountNumber(): string
     {
         $accountNumber = '100';
         for ($i = 0; $i < 7; $i++) {

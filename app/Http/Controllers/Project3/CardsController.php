@@ -33,7 +33,7 @@ class CardsController extends Controller
         $card = new Card();
         $card->type = $request->type;
         $card->expiry_date = Carbon::createFromFormat('m/Y', $request->expiry_date)->endOfMonth();
-        $card->number = $this->generateCardNumber();
+        $card->number = CardsController::generateCardNumber();
         $card->user_id = $request->user()->id;
         $card->account_id = Account::where('account_number', $request->account_number)->first()->id;
         if($card->save()) {
@@ -48,7 +48,7 @@ class CardsController extends Controller
         ], 500);
     }
 
-    private function generateCardNumber(): string
+    public static function generateCardNumber(): string
     {
         $cardNumber = '468564';
         for ($i = 0; $i < 10; $i++) {
