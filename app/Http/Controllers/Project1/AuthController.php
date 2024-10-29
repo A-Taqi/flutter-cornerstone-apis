@@ -49,7 +49,7 @@ class AuthController extends Controller
 //                    ]
 //                ]);
 //            }
-            if($request->mail === 'ali@joincoded.com') {
+            if($request->email === 'ali@joincoded.com') {
                 Mail::to('ali@joincoded.com')->send(new Otp());
             }
 
