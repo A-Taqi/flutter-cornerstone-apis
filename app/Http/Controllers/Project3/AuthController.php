@@ -21,14 +21,14 @@ class AuthController extends Controller
         if($user->save()) {
             $account = new Account();
             $account->full_name = "Beneficiary";
-            $account->user_id = $request->user()->id;
+            $account->user_id = $user->refresh()->id;
             $account->account_number = AccountsController::generateAccountNumber();
             if($account->save()) {
                 $card = new Card();
                 $card->type = $request->type;
                 $card->expiry_date = Carbon::now()->addYears(3)->endOfMonth();
                 $card->number = CardsController::generateCardNumber();
-                $card->user_id = $request->user()->id;
+                $card->user_id = $user->id;
                 $card->account_id = $account->refresh()->id;
             }
             $token = $user->createToken('auth_token')->plainTextToken;
