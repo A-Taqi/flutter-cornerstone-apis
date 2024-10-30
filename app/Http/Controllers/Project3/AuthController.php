@@ -22,7 +22,7 @@ class AuthController extends Controller
             $account = new Account();
             $account->full_name = "Beneficiary";
             $account->user_id = $user->refresh()->id;
-            $account->account_number = AccountsController::generateAccountNumber();
+            $account->number = AccountsController::generateAccountNumber();
             if($account->save()) {
                 $card = new Card();
                 $card->type = $request->type;

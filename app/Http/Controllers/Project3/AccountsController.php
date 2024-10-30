@@ -27,7 +27,7 @@ class AccountsController extends Controller
         $account = new Account();
         $account->full_name = $request->full_name;
         $account->user_id = $request->user()->id;
-        $account->account_number = AccountsController::generateAccountNumber();
+        $account->number = AccountsController::generateAccountNumber();
         if($account->save()) {
             return response()->json([
                 'message' => 'success',

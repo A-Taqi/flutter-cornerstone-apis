@@ -25,7 +25,7 @@ class CardsController extends Controller
         $request->validate([
             'type' => 'required|in:debit,credit',
             'expiry_date' => 'required|date_format:m/Y',
-            'account_number' => 'required|exists:p3_accounts,account_number,user_id,'.$request->user()->id,
+            'account_number' => 'required|exists:p3_accounts,number,user_id,'.$request->user()->id,
         ]);
 
 
@@ -35,7 +35,7 @@ class CardsController extends Controller
         $card->expiry_date = Carbon::createFromFormat('m/Y', $request->expiry_date)->endOfMonth();
         $card->number = CardsController::generateCardNumber();
         $card->user_id = $request->user()->id;
-        $card->account_id = Account::where('account_number', $request->account_number)->first()->id;
+        $card->account_id = Account::where('number', $request->account_number)->first()->id;
         if($card->save()) {
             return response()->json([
                 'message' => 'success',
