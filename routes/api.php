@@ -59,6 +59,7 @@ Route::prefix("burgan-app")->group(function () {
     Route::middleware("auth:sanctum")->group(function () {
         Route::get("/accounts", [App\Http\Controllers\Project3\AccountsController::class, "index"]);
         Route::post("/accounts", [App\Http\Controllers\Project3\AccountsController::class, "store"]);
+        Route::put("/accounts/{account}", [App\Http\Controllers\Project3\AccountsController::class, "update"]);
         Route::post("/accounts/{account}/deposit", [App\Http\Controllers\Project3\AccountsController::class, "deposit"]);
         Route::post("/accounts/{account}/withdraw", [App\Http\Controllers\Project3\AccountsController::class, "withdraw"]);
         Route::post("/accounts/{account}/transfer", [App\Http\Controllers\Project3\AccountsController::class, "transfer"]);

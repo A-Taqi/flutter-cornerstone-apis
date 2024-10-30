@@ -40,6 +40,25 @@ class AccountsController extends Controller
         ], 500);
     }
 
+    public function update(Account $account, Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+        ]);
+
+        $account->full_name = $request->full_name;
+        if($account->save()) {
+            return response()->json([
+                'message' => 'success',
+                'data' => $account,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Failed to update account',
+        ], 500);
+    }
+
     public static function generateAccountNumber(): string
     {
         $accountNumber = '100';
