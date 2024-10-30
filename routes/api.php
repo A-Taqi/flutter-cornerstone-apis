@@ -76,5 +76,11 @@ Route::prefix("burgan-assistant")->group(function () {
 
     Route::post("/signup", [App\Http\Controllers\Project4\AuthController::class, "signup"]);
     Route::post("/login", [App\Http\Controllers\Project4\AuthController::class, "login"]);
+
+    // Protected Routes
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::get("/transactions", [App\Http\Controllers\Project4\TransactionsController::class, "index"]);
+        Route::post("/transactions", [App\Http\Controllers\Project4\TransactionsController::class, "store"]);
+    });
 });
 
