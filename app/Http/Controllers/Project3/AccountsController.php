@@ -49,4 +49,83 @@ class AccountsController extends Controller
 
         return $accountNumber;
     }
+
+    public static function deposit(Account $account, Request $request) {
+        $request->validate([
+            'amount' => 'required|numeric|min:1',
+        ]);
+
+        $account->balance += $request->amount;
+        if($account->save()) {
+            return response()->json([
+                'message' => 'success',
+                'data' => $account,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Failed to deposit into account',
+        ], 500);
+    }
+
+    public static function withdraw(Account $account, Request $request) {
+        $request->validate([
+            'amount' => 'required|numeric|min:1',
+        ]);
+
+        if($account->balance < $request->amount) {
+            return response()->json([
+                'message' => 'error',
+                'data' => 'Insufficient funds'
+            ], 403);
+        }
+
+        $account->balance -= $request->amount;
+        if($account->save()) {
+            return response()->json([
+                'message' => 'success',
+                'data' => $account,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Failed to withdraw from account',
+        ], 500);
+    }
+
+    public static function transfer(Account $account, Request $request) {
+        $request->validate([
+            'amount' => 'required|numeric|min:1',
+            'to_account_number' => 'required|exists:p3_accounts,number',
+        ]);
+
+        $recipientAccount = Account::where('number', $request->to_account_number)->first();
+
+        if($recipientAccount->number === $account->number) {
+            return response()->json([
+                'message' => 'error',
+                'data' => 'You cannot transfer funds to the same account'
+            ], 403);
+        }
+
+        if($account->balance < $request->amount) {
+            return response()->json([
+                'message' => 'error',
+                'data' => 'Insufficient funds'
+            ], 403);
+        }
+
+        $account->balance -= $request->amount;
+        $recipientAccount->balance += $request->amount;
+        if($recipientAccount->save() && $account->save()) {
+            return response()->json([
+                'message' => 'success',
+                'data' => $account,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Failed to transfer funds',
+        ], 500);
+    }
 }
